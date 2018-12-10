@@ -1,0 +1,38 @@
+page-page1 {
+    .center {
+        text-align: center;  
+    }
+    
+
+
+    .ionic-logo:after {
+      content:'';
+      position:absolute;
+      width:38px;
+      height:38px;
+      background: #5E86C4;
+      top:50%;
+      left:50%;
+      margin-left:-19px;
+      margin-top:-19px;
+      border-radius:100%;
+      -moz-border-radius:100%;
+
+    }
+
+    .ionic-logo:before {
+      content:'';
+      background: #5E86C4;
+      width:14px;
+      height:14px;
+      position:absolute;
+      top:-8px;
+      left:50%;
+      margin-left:-7px;
+      border-radius:100%;
+      -moz-border-radius:100%;
+
+    }
+
+    
+}

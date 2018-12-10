@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pass Type</ion-title>
+    <ion-icon name="UNH-mobile"></ion-icon>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h3>UNH Parking
+  </h3>
+
+     <div class="center">
+        <p class="UNH Parking"></p>
+    </div>
+
+     <ion-card>
+       <ion-card-header>
+         Which Parking Pass Do You Have?
+       </ion-card-header>
+
+       <ion-list>
+         <ion-item>
+           <ion-label> Commuter</ion-label>
+           <ion-toggle color="secondary"> [(ngModel)] = "Commuter" </ion-toggle>
+         </ion-item>
+       </ion-list>
+       <ion-list>
+         <ion-item>
+           <ion-label> Resident</ion-label>
+           <ion-toggle color="danger"> [(ngModel)] = "Resident" </ion-toggle>
+         </ion-item>
+       </ion-list>
+       <ion-list>
+         <ion-item>
+           <ion-label> Atwood</ion-label>
+           <ion-toggle color="orange"> [(ngModel)] = "Atwood" </ion-toggle>
+         </ion-item>
+       </ion-list>
+       <ion-list>
+         <ion-item>
+           <ion-label> Savin Or Main</ion-label>
+           <ion-toggle color="dark"> [(ngModel)] = "Savin Main" </ion-toggle>
+         </ion-item>
+       </ion-list>
+       <ion-list>
+         <ion-item>
+           <ion-label> Underclassmen</ion-label>
+           <ion-toggle color="yellow"> [(ngModel)] = "under" </ion-toggle>
+         </ion-item>
+       </ion-list>
+       <ion-list>
+         <ion-item>
+           <ion-label> Faculty/Staff (Silver)</ion-label>
+           <ion-toggle color="silver"> [(ngModel)] = "silver staff" </ion-toggle>
+         </ion-item>
+       </ion-list>
+       <ion-list>
+       <ion-item>
+         <ion-label> Faculty/Staff (Gold)</ion-label>
+         <ion-toggle color="gold"> [(ngModel)] = "gold staff" </ion-toggle>
+       </ion-item>
+       </ion-list>
+     </ion-card>
+
+	  <button ion-button secondary menuToggle>Toggle Menu</button>
+</ion-content>
