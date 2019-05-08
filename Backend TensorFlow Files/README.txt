@@ -25,3 +25,5 @@
 	- The script reads in the security cameras by RTSP protocol with their IP addresses and login info
 
 Since GitHub limits the size of files, it may be necessary to download the whole project from my Google Drive link, where the parts didn't need to be separated.
+
+https://drive.google.com/open?id=1H3VyCfoZvR2oyKyeKMN36c7bVwCQxhSS
