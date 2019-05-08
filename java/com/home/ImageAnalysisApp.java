@@ -1,10 +1,10 @@
 package com.home;
 
-import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -16,7 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ImageAnalysisApp {
     // ===================================
     // ===================================
-    private class AnalyzedData {
+    protected class AnalyzedData {
         protected int numSpots;
         protected Date timestamp;
         
@@ -25,77 +25,86 @@ public class ImageAnalysisApp {
             this.timestamp = timestamp;
         }
     }
-    // ===================================
     
-    private final Lock lock;
-    private Deque<AnalyzedData> lotA;
-    private Deque<AnalyzedData> lotB;
-    private final int MAX = 10;         // The max size of each deque.
+    // ===================================
+    // The class will read and write to 
+    // the tables below.
+    //
+    //   WARNING:
+    //     As lots get added, more arrays
+    //     will need to be added.
+    // ===================================
+    private Lock lock;
+    private HashMap<String, AnalyzedData> lots;
     
     public ImageAnalysisApp() {
-        lotA = new LinkedList<>();
-        lotB = new LinkedList<>();
+        lots = new HashMap<>();
         lock = new ReentrantLock();
     }
     
-    public void printLot(char lot) {
-        switch(lot) {
-            case 'A':
-                for (AnalyzedData aD : lotA) 
-                    System.out.println("Lot A: numSpots="+aD.numSpots+" timestamp="+aD.timestamp);
-                break;
-            case 'B':
-                for (AnalyzedData aD : lotA) 
-                    System.out.println("Lot B: numSpots="+aD.numSpots+" timestamp="+aD.timestamp);
-                break;
+    /** ===================================
+     * Outputs the list of a given lot.
+     * 
+     *  Lot [l]: numSpots=[ns] timestamp=[ts]
+     *  ===================================
+     */
+    public void printLots() {
+        for (Map.Entry<String, AnalyzedData> entry : lots.entrySet()) {
+            String lot = entry.getKey();
+            AnalyzedData aD = entry.getValue();
+            System.out.println("Lot "+lot+": numSpots="+aD.numSpots+" timestamp="+aD.timestamp);
         }
     }
     
-    public void write(char lot, int numSpots, String datetimeString) throws ParseException {
-        System.out.println("Performing write.");
-        Date timestamp = DateFormat.getDateTimeInstance().parse(datetimeString);
-        AnalyzedData d = new AnalyzedData(numSpots, timestamp);
-        switch(lot) {
-            case 'A':
-                addToLot(lotA, d);
-                break;
-            case 'B':
-                addToLot(lotB, d);
-                break;
-        }
-    }
-    /** 
-     * may not work due to a potential new list.
+    /** ===================================
      * 
      * @param lot
-     * @param d 
+     *      Used as the choice between what 
+     *      table to read from.
+     * @return
+     * @throws NoSuchElementException 
+     *      This will be thrown when there 
+     *      are no elements in the lot.
+     *  ===================================
      */
-    private void addToLot(Deque<AnalyzedData> lot, AnalyzedData d) {
-        if (lot.size() < MAX) {
-            lot.addFirst(d);
-        } else {
-            lot.removeLast();
-            lot.addFirst(d);
+    public AnalyzedData read(char lot) throws NoSuchElementException {
+        AnalyzedData a = null;
+        
+        try {   lock.lock();    System.out.println("lock table");
+            a = lots.get(String.valueOf(lot));
+            if ( a == null ) 
+                throw new NoSuchElementException("Could not find key "+lot
+                        +" in lot hashmap.");
+        } finally {
+            lock.unlock();      System.out.println("unlock table");
         }
+        return a;
     }
     
-    public int read(char lot) {
-        AnalyzedData d = null;
-        int numSpots;
-        try {
-            switch (lot) {
-                case 'A':
-                    d = lotA.getFirst();
-                    break;
-                case 'B':
-                    d = lotB.getFirst();
-                    break;
-            }
-            numSpots = d.numSpots;
-        } catch (NoSuchElementException nsee) {
-            nsee.printStackTrace();
-            numSpots = -1;
+    /** ===================================
+     * 
+     * @param lot
+     * @param numSpots
+     * @param datetimeString
+     * @throws ParseException 
+     *  Thrown when the simple-date-formatter 
+     *  could not accept being sent 
+     *  in to be write.
+     *  ===================================
+     */
+    public void write(char lot, int numSpots, String datetimeString) throws ParseException {
+        System.out.println("Performing write.");
+        SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy");
+        Date timestamp = format.parse(datetimeString);
+        
+        AnalyzedData d = new AnalyzedData(numSpots, timestamp);
+        try {   lock.lock();    System.out.println("lock table");
+            lots.put(String.valueOf(lot), d);
+        } finally {
+            // remember, always release your locks ;)
+            lock.unlock();      System.out.println("unlock table");
         }
-        return numSpots;
+        System.out.println("Write Success.");
     }
+    
 }

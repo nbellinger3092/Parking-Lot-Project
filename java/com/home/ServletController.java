@@ -2,10 +2,10 @@ package com.home;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -19,8 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author michaeltorres
  */
 public class ServletController extends HttpServlet {
-    ImageAnalysisApp imageApp;
-    UserInterfaceApp userApp;
+    ImageAnalysisApp imageApp = new ImageAnalysisApp();
     
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -33,13 +32,33 @@ public class ServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println("<html>");
-            out.println("<body>");
-                out.println("<h1>http get test</h1>");
-            out.println("</body>");
-        out.println("</html>");
-        System.out.println("got a get request");
+        char lot;
+        int numCars;
+        String timestamp;
+        ImageAnalysisApp.AnalyzedData row;
+        // Ionic request configurations.
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+        PrintWriter out = response.getWriter();     // Get ready to write.
+        String sLot = request.getParameter("lot");  // Get the lot request.
+        lot = sLot.charAt(0);
+        System.out.println("got a get request for lot "+lot);
+        try {
+            row = imageApp.read(lot);
+            numCars = row.numSpots;
+            timestamp = row.timestamp.toString();
+            out.println("numCars="+numCars);
+            out.println("timestamp="+timestamp);
+            imageApp.printLots();
+            /* End */
+        } catch(NoSuchElementException nsee) {
+            nsee.printStackTrace();
+            out.println("ERROR=No element exists in "+lot);
+            /* End */
+        }
     }
 
     /**
@@ -53,19 +72,32 @@ public class ServletController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println("<html>");
-            out.println("<body>");
-                out.println("<h1>http post test</h1>");
-            out.println("</body>");
-        out.println("</html>");
-        BufferedReader in = request.getReader();
-        Stream<String> lines = in.lines();
-        for (Iterator iterator = lines.iterator(); iterator.hasNext();) {
-            String next = (String)iterator.next();
-            System.out.println(next);
+        String sLot;        char lot;
+        String sNumCars;    int numCars;
+        String timestamp;
+        
+        BufferedReader in = request.getReader();    // Get ready to read.
+        Stream<String> lines = in.lines();          // Get all the data lines.
+        Iterator iterator = lines.iterator();
+        System.out.println("================================================\n");
+        sLot = (String)iterator.next();             // Read the lot.
+        sNumCars = (String)iterator.next();         // Read the num. of cars.
+        timestamp = (String)iterator.next();        // Read the timestamp.
+        System.out.println("sLot="+sLot+"\nsNumCars="+sNumCars+"\ntimestamp="+timestamp);
+        lot = sLot.charAt(0);
+        numCars = Integer.parseInt(sNumCars.substring(sNumCars.indexOf('[')+1, sNumCars.indexOf('.')));
+        System.out.println("got a post request::"+lot+':'+numCars+':'+timestamp);
+        try {
+            System.out.println("ready to write::"+lot+':'+numCars+':'+timestamp);
+            // Add the row to the table in memory.
+            imageApp.write(lot, numCars, timestamp);
+        } catch (ParseException ex) {
+            System.err.println(ex.getMessage());
+            Logger.getLogger(ServletController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("got a post request");
+        // Let's see the changes.
+        imageApp.printLots();
+        System.out.println("end");
     }
     
     // ===================================
@@ -74,7 +106,7 @@ public class ServletController extends HttpServlet {
     public static void main(String args[]) {
         ImageAnalysisApp iApp = new ImageAnalysisApp();
         try {
-            iApp.write('A', 5, "02/14/2019");
+            iApp.write('A', 5, "Thu Feb 28 15:44:29 2019");
         } catch (ParseException pe) {
            pe.printStackTrace();
         }
