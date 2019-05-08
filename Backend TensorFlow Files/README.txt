@@ -19,5 +19,9 @@
 	
 	- If desired, Anaconda provides an easy way to install both TensorFlow 
 	- and TensorFlow-GPU with their dependent libraries in a virtual environment
-3)You should now be ready to run the odv_final.py script
+	
+3)Download the model from this link: http://download.tensorflow.org/models/object_detection/faster_rcnn_nas_coco_2018_01_28.tar.gz
+4)You should now be ready to run the odv_final.py script
 	- The script reads in the security cameras by RTSP protocol with their IP addresses and login info
+
+Since GitHub limits the size of files, it may be necessary to download the whole project from my Google Drive link, where the parts didn't need to be separated.
