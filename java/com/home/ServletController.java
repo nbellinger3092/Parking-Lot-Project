@@ -100,15 +100,4 @@ public class ServletController extends HttpServlet {
         System.out.println("end");
     }
     
-    // ===================================
-    //          Unit Tests
-    // ===================================
-    public static void main(String args[]) {
-        ImageAnalysisApp iApp = new ImageAnalysisApp();
-        try {
-            iApp.write('A', 5, "Thu Feb 28 15:44:29 2019");
-        } catch (ParseException pe) {
-           pe.printStackTrace();
-        }
-    }
 }
