@@ -1,0 +1,57 @@
+<!--Pre generated header-->
+<ion-header class="unhcolor">
+  <ion-toolbar>
+    <ion-title class="white-text">
+      Parking Lots
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <!--Refresher call on pull down and release of page-->
+    <ion-refresher id="refresh" disabled="false" slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="dots"
+                               pullingIcon="arrow-dropdown-circle"></ion-refresher-content>
+    </ion-refresher>
+    <!--List to show all lots (only library and hoffman are currently set to dynamically change-->
+    <ion-list lines="none">
+        <!--All names for the lots will be located on the left and spots will be on the roght
+            Will be replaced with spot number by id when data is found for that lot-->
+        <ion-item class="bottomgold">
+            <ion-label class="large-label" slot="start">Library</ion-label>
+            <ion-note slot="end" style="font-size: 18px">
+                Spots Open:
+                <ion-note id="i0" style="font-size: 18px">
+                    <p slot="end">00</p>
+                </ion-note>
+            </ion-note>
+        </ion-item>
+        <ion-item class="bottomgold">
+            <ion-label class="large-label" slot="start"> Westside </ion-label>
+            <ion-note slot="end" style="font-size:18px">Spots Open: 10</ion-note>
+        </ion-item>
+        <ion-item class="bottomgold">
+            <ion-label class="large-label" slot="start"> Dunham</ion-label>
+            <ion-note slot="end" style="font-size: 18px">Spots Open: 3  </ion-note>
+        </ion-item>
+        <ion-item class="bottomgold">
+            <ion-label class="large-label" slot="start">Hoffman</ion-label>
+            <ion-note slot="end" style="font-size: 18px">
+                Spots Open:
+                <ion-note id="p01" style="font-size: 18px">
+                    <p slot="end">00</p>
+                </ion-note>
+            </ion-note>
+        </ion-item>
+        <ion-item class="bottomgold">
+            <ion-label class="large-label" id="cel" slot="start"> Celentano</ion-label>
+            <ion-note slot="end" style="font-size: 18px"> Spots Open: 1</ion-note>
+        </ion-item>
+        <ion-item class="bottomgold">
+            <ion-label class="large-label" id="bix" slot="start"> Bixler </ion-label>
+            <ion-note slot="end" style="font-size: 18px">Spots Open: 6 </ion-note>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

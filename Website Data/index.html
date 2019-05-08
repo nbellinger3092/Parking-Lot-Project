@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--Written by Nicholas Bellinger-->
+<html lang="en">
+	<head>
+		<!--Sets title-->
+		<title>UNH Park Smart :: Home</title>
+		<!--Loads the logo icon in the tab title-->
+		<link rel="icon" href="ParkSmart.ico">
+		<meta charset="utf8" name="viewport" content="width=device-width, initial-scale=1.0">
+		<!--Set stylesheet-->
+		<link rel="stylesheet" href="parksmart.css">
+	</head>
+
+	<body>
+		<!--Wrapper for the header-->
+		<div id="wrapper">
+			<div id="headerImage">
+				<img src="ParkSmartTransparent.png" alt="UNH Logo" class="center">
+			</div>
+		</div>
+		<div>
+			<ul>
+				<!--Settings for the main body that shows lot and free spots-->
+				<div id="middle">
+					<li><a id="Hoffman" style="font-size: 4em"></a><a id="LotH"></a></li></br>
+					<li><a id="Library" style="font-size: 4em"></a><a id="LotL"></a></li></br>
+					<li><a id="Westside" style="font-size: 4em"></a><a id="LotW"></a></li></br>
+					<li><a id="Dunham" style="font-size: 4em"></a><a id="LotD"></a></li></br>
+					<li><a id="Celentano" style="font-size: 4em"></a><a id="LotC"></a></li></br>
+					<li><a id="Bixler" style="font-size: 4em"></a><a id="LotB"></a></li></br>
+				</div>
+			</ul>
+		</div>
+	</body>
+</html>
+<!--Javascript for getting parking data from Java server-->
+<script>
+		var request = new XMLHttpRequest();
+		request.withCredentials = false;
+		XMLHttpRequest.responseType = "text"
+		/*Opens a GET request to the server to request data for lot A*/
+		request.open('GET', 'http://159.203.181.128:8080/parking-app/main' + '?lot=A', true); console.log(request.readyState);
+		request.send();
+		request.onreadystatechange = function(){
+		if (request.readyState == 4)
+		{
+		/*Stores the GET response in the variable data*/
+		var data = this.responseText;
+		/*Next two lines split the excess off of the string, such as the timestamp and lot ID*/
+		var data0 = data.split("=",2);
+		var data1 = data0[1].split("\n",2);
+		/*These set the data and lot into the HTML document*/
+		document.getElementById("Hoffman").innerHTML = "Hoffman"; 
+		document.getElementById("LotH").innerHTML = "Spots Open: " + data1[0];
+		document.getElementById("Library").innerHTML = "Library"; 
+		document.getElementById("LotL").innerHTML = "Spots Open: " + "3";
+		document.getElementById("Westside").innerHTML = "Westside"; 
+		document.getElementById("LotW").innerHTML = "Spots Open: " + "8";
+		document.getElementById("Dunham").innerHTML = "Dunham"; 
+		document.getElementById("LotD").innerHTML = "Spots Open: " + "22";
+		document.getElementById("Celentano").innerHTML = "Celentano"; 
+		document.getElementById("LotC").innerHTML = "Spots Open: " + "11";
+		document.getElementById("Bixler").innerHTML = "Bixler"; 
+		document.getElementById("LotB").innerHTML = "Spots Open: " + "5";}
+		};
+	</script>

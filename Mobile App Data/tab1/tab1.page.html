@@ -1,0 +1,56 @@
+<ion-header class="unhcolor">
+  <ion-toolbar>
+    <ion-title class="white-text">
+      Home Page
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!--Refresher call on pull down and release of page-->
+    <ion-refresher id="refresh" disabled="false" slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="dots"
+                               pullingIcon="arrow-dropdown-circle"></ion-refresher-content>
+    </ion-refresher>
+    <!--Customized home screen-->
+    <!--Will hold the statistics from the database-->
+    <ion-card>
+    <ion-img src="/assets/ParkSmartBlue.png"></ion-img>
+    <ion-card-header>
+        <ion-card-subtitle>University of New Haven</ion-card-subtitle>
+        <ion-card-title>Welcome to UNH Park Smart</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <p>Please click on of the tabs at the bottom of the screen to navigate to the other pages</p>
+    </ion-card-content>
+    </ion-card>
+    <ion-list lines="none">
+        <ion-list-header>
+            <ion-label>Resources</ion-label>
+        </ion-list-header>
+        <ion-item href="https://www.newhaven.edu/">
+            <ion-icon slot="start" color="medium" name="book"></ion-icon>
+            <ion-label>University of New Haven Website</ion-label>
+        </ion-item>
+        
+        <!--List of statistics charts-->
+    </ion-list>
+    <div>
+
+
+        <div #chartContainer class='chart-container; ion-text-center'>
+            <ion-label>Hoffman Weekly Statistics</ion-label>
+            <canvas #weekChar id='weekChart'></canvas>
+        </div>
+
+    </div>
+    <div>
+        <div #chartContainer class='chart-container; ion-text-center'>
+            <ion-label>Monday Hourly Statistics</ion-label>
+            <canvas #monChar id="monChart" style="width: 250px; height: 300px"></canvas>
+        </div>
+
+    </div>
+
+
+</ion-content>

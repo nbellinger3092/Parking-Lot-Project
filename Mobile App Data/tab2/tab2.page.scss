@@ -1,0 +1,47 @@
+//cosmetic style sheet
+ion-title{
+    position:absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 0 10px 1px;
+    width: 100%;
+    height: 100%;
+
+}
+.coloring {
+    --ion-toggle-color: #f2740b;
+
+}
+.unhcolor {
+    --ion-background-color: #0B3B6B;
+}
+.white-text {
+    color: whitesmoke;
+}
+.bottomgold {
+    border-bottom: 1.8px ridge #ffcc33;
+    margin-left: 15px;
+    margin-right: 15px
+}
+.silver {
+    //   --ion-toggle-color: #c0c0c0;
+    // --ion-background-color: #c0c0c0;
+    --handle-background-checked: #c0c0c0;
+    --background-checked: #ECECEB;
+}
+.gold {
+    --handle-background-checked: #d4af37;
+    --background-checked: #DFDF86;
+}
+.green {
+    --background-checked: #c0FB7F;
+    --handle-background-checked: #99E645;
+}
+.orange {
+    --background-checked: #F9CF91;
+    --handle-background-checked: #f2740b;
+}
+.goldTab {
+    --color-selected: #f2740b;
+}

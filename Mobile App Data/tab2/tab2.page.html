@@ -1,0 +1,73 @@
+<!--Pre generated header-->
+<ion-header class="unhcolor">
+    <ion-toolbar>
+        <ion-title class="white-text">
+            Parking Passes
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!--Refresher call on pull down and release of page-->
+    <ion-refresher id="refresh" disabled="false" slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="dots"
+                               pullingIcon="arrow-dropdown-circle"></ion-refresher-content>
+    </ion-refresher>
+    <!--List for Parking Passes with toggle switches
+        All of these colors are based on the parking passes on the website-->
+    <ion-list lines="none">
+        <h6 align="center">What Type of Parking Pass Do You Have?</h6>
+        <!--Each of these will select as the color of their pass and be underlined in a gold line-->
+        <ion-item class="bottomgold">
+            <ion-label> Commuter</ion-label>
+            <ion-toggle class="green"
+                        id="commute"
+                        [(ngModel)]="Commuter" onchange="updateCelentano($event)">
+
+            </ion-toggle>
+        </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+        <ion-item class="bottomgold">
+            <ion-label> Resident</ion-label>
+            <ion-toggle color="danger" (click)="passResident()"> [(ngModel)] = "Resident" </ion-toggle>
+        </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+        <ion-item class="bottomgold">
+            <ion-label> Atwood or Forrest Hills</ion-label>
+            <ion-toggle class="orange"> [(ngModel)] = "Atwood" </ion-toggle>
+        </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+        <ion-item class="bottomgold">
+            <ion-label> Savin Or Main</ion-label>
+            <ion-toggle color="dark"> [(ngModel)] = "Savin Main" </ion-toggle>
+        </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+        <ion-item class="bottomgold">
+            <ion-label> Underclassmen</ion-label>
+            <ion-toggle color="warning"> [(ngModel)] = "under" </ion-toggle>
+        </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+        <ion-item class="bottomgold">
+            <ion-label> Faculty/Staff (Silver)</ion-label>
+            <ion-toggle class="silver"> [(ngModel)] = "silver staff" </ion-toggle>
+        </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+        <ion-item class="bottomgold">
+            <ion-label> Faculty/Staff (Gold)</ion-label>
+            <ion-toggle class="gold"> [(ngModel)] = "gold staff" </ion-toggle>
+        </ion-item>
+    </ion-list>
+    <ion-list line="none">
+        <ion-item class="bottomgold">
+            <ion-label>Faculty/Staff (Blue)</ion-label>
+            <ion-toggle color="primary"> [(ngModel)] ="blue staff"</ion-toggle>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

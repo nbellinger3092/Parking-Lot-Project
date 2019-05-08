@@ -1,0 +1,126 @@
+/*CSS for desktop browsers
+  Written by Nicholas Bellinger*/
+a
+{
+	text-align: center;
+	color: black;
+	font-family: muller-light,helvetica, sans-serif;
+	font-size: 4em;
+	text-decoration: underline;
+	text-decoration-color: gold;
+	border-bottom: gold;
+}
+
+body
+{
+	background-color:white;
+	font-family: muller-light,helvetica, sans-serif;
+}
+button
+{
+	font-size: 2em;
+	font-family: muller-light,helvetica, sans-serif;
+	color: #0b3b6b;
+	background-color: white;
+	border: ridge;
+}
+
+h1
+{
+	color: #0b3b6b;
+	font-family: muller-light,helvetica, sans-serif;
+	text-align: center;
+}
+
+img
+{
+	font-family: muller-light,helvetica, sans-serif;
+	overflow: hidden;
+}
+
+ul
+{
+	font-family: muller-light,helvetica, sans-serif;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.center
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+#headerImage
+{
+	height: 200px;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+}
+
+/*Each loth as its own CSS formatting to 
+  line them up correctly*/
+#LotH
+{
+	font-family: muller-light,helvetica, sans-serif;
+	padding: 10em;
+	font-size: 2.5em;
+	
+}
+#LotL
+{
+	font-family: muller-light,helvetica, sans-serif;
+	padding: 11.15em;
+	font-size: 2.5em;
+	
+}
+#LotW
+{
+	font-family: muller-light,helvetica, sans-serif;
+	padding: 9.5em;
+	font-size: 2.5em;
+	
+}
+#LotD
+{
+	font-family: muller-light,helvetica, sans-serif;
+	padding: 10em;
+	font-size: 2.5em;
+	
+}
+#LotC
+{
+	font-family: muller-light,helvetica, sans-serif;
+	padding: 8.75em;
+	font-size: 2.5em;
+	
+}
+#LotB
+{
+	font-family: muller-light,helvetica, sans-serif;
+	padding: 12em;
+	font-size: 2.5em;	
+}
+#middle
+{
+	font-family: muller-light,helvetica, sans-serif;
+	margin-left: 25%;
+	margin-right: 25%;	
+}
+/*Main CSS wrapper around the body*/
+#wrapper
+{
+	font-family: muller-light,helvetica, sans-serif;
+	background-color: #0b3b6b;
+	padding: 0 0 20px 30px;
+	border: 1px ridge #00332B;
+	border-radius: 15px;
+	box-shadow: inset -3px -3px 3px 3px #00332B;
+	margin-right: auto;
+	margin-left: auto;
+}

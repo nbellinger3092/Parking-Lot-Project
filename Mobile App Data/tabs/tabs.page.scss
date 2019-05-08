@@ -1,0 +1,35 @@
+//cosmetic style sheet
+.tab-color{
+    background-color: #4197f9;
+}
+.unhcolor {
+    --ion-background-color: #0B3B6B;
+}
+.goldSelect.tab-highlight {
+    
+    --color-selected: #ffcc33;
+   // --background-focused: #ffcc33;
+}
+.hovering:hover{
+    --ion-background-color: #ffcc33;
+}
+.selected {
+    background-color: #ffcc33;
+    
+}
+ion-tabs {
+    --ion-color-primary: #ffcc33;
+    --ion-tab-bar-color: #ffffff;
+   // --ion-border-color: #ffcc33;
+    //  --ion-background-color: #ffffff;
+}
+
+/*
+ion-select {
+    .select-icon {
+        .select-icon-inner {
+            color: gold;
+        }
+    }
+}
+    */
